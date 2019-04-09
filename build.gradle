@@ -1,0 +1,49 @@
+plugins {
+    id "com.github.sherter.google-java-format" version "0.8"
+    id "java"
+}
+
+
+group 'com.github.knaufk'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+ext.scalaBinaryVersion = '2.11'
+ext.log4jVersion = '2.10.0'
+ext.junitVersion = '4.12'
+ext.mockitoVersion = '1.10.19'
+ext.flinkVersion = '1.7.2'
+
+dependencies {
+
+    compile "org.apache.logging.log4j:log4j-slf4j-impl:$log4jVersion"
+    compile "org.apache.logging.log4j:log4j-api:$log4jVersion"
+    compile "org.apache.logging.log4j:log4j-core:$log4jVersion"
+    compile "org.apache.logging.log4j:log4j-jcl:$log4jVersion"
+
+    compile "org.apache.flink:flink-java:$flinkVersion"
+    compile "org.apache.flink:flink-streaming-java_$scalaBinaryVersion:$flinkVersion"
+    compile "org.apache.flink:flink-runtime-web_$scalaBinaryVersion:$flinkVersion"
+    compile "org.apache.flink:flink-runtime_$scalaBinaryVersion:$flinkVersion"
+
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.mockito:mockito-all:$mockitoVersion"
+    testCompile "org.assertj:assertj-core:3.12.2"
+
+    testCompile "org.apache.flink:flink-test-utils_$scalaBinaryVersion:$flinkVersion"
+    testCompile "org.apache.flink:flink-runtime_$scalaBinaryVersion:$flinkVersion:tests"
+    testCompile "org.apache.flink:flink-streaming-java_$scalaBinaryVersion:$flinkVersion:tests"
+
+}
