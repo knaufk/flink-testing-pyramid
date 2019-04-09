@@ -2,11 +2,16 @@ package com.github.knaufk.udfs;
 
 import java.util.List;
 import org.apache.flink.annotation.VisibleForTesting;
+import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.RichFlatMapFunction;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.runtime.metrics.DescriptiveStatisticsHistogram;
 import org.apache.flink.util.Collector;
 
+/**
+ * A stateless {@link FlatMapFunction}, which takes a {@link List} of {@link Integer}s and returns
+ * each element from the list as a separate stream record.
+ */
 public class FlattenFunction extends RichFlatMapFunction<List<Integer>, Integer> {
 
   private DescriptiveStatisticsHistogram listStatistics;

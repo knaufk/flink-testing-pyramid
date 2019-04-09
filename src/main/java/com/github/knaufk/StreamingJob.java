@@ -14,6 +14,10 @@ import org.apache.flink.streaming.api.functions.sink.PrintSinkFunction;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 
+/**
+ * A simple streaming job, which takes {@link List<Integer>}s and returns the per-second count for
+ * each of the elements contained within those lists.
+ */
 public class StreamingJob {
 
   private SourceFunction<List<Integer>> source;

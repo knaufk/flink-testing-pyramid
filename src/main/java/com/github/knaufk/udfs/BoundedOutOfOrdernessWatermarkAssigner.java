@@ -2,8 +2,17 @@ package com.github.knaufk.udfs;
 
 import org.apache.flink.api.common.time.Time;
 import org.apache.flink.streaming.api.functions.AssignerWithPeriodicWatermarks;
+import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
 import org.apache.flink.streaming.api.watermark.Watermark;
+import org.apache.flink.streaming.runtime.streamrecord.StreamRecord;
 
+/**
+ * A simple {@link AssignerWithPeriodicWatermarks} similar to {@link
+ * BoundedOutOfOrdernessTimestampExtractor}, which takes the existing timestamp of the {@link
+ * StreamRecord} instead of extracting a new timestamp.
+ *
+ * @param <T>
+ */
 public class BoundedOutOfOrdernessWatermarkAssigner<T>
     implements AssignerWithPeriodicWatermarks<T> {
   private static final long serialVersionUID = 1L;

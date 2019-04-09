@@ -9,6 +9,11 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
 
+/**
+ * A {@link KeyedProcessFunction}, which for each key counts the number of events within a tumbling
+ * event time window of the size given in the constructor. The counts is emitted once, when the
+ * watermark passes the end time of the window.
+ */
 public class EvenTimeWindowCounter
     extends KeyedProcessFunction<Integer, Integer, Tuple3<Long, Integer, Integer>> {
 
