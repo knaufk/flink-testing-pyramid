@@ -24,7 +24,7 @@ ext.scalaBinaryVersion = '2.11'
 ext.log4jVersion = '2.10.0'
 ext.junitVersion = '4.12'
 ext.mockitoVersion = '1.10.19'
-ext.flinkVersion = '1.7.2'
+ext.flinkVersion = '1.8.0'
 
 dependencies {
 
@@ -36,7 +36,6 @@ dependencies {
     compile "org.apache.flink:flink-java:$flinkVersion"
     compile "org.apache.flink:flink-streaming-java_$scalaBinaryVersion:$flinkVersion"
     compile "org.apache.flink:flink-runtime-web_$scalaBinaryVersion:$flinkVersion"
-    compile "org.apache.flink:flink-runtime_$scalaBinaryVersion:$flinkVersion"
 
     testCompile "junit:junit:$junitVersion"
     testCompile "org.mockito:mockito-all:$mockitoVersion"
