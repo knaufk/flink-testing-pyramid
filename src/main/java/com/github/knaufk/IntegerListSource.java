@@ -7,7 +7,7 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 
 /**
- * An in-memory source of {@link List<Integer>} to feed the job. The source assign timestamps to the
+ * An in-memory source of {@link List<Integer>}s to feed the job. The source assigns timestamps to the
  * records based on processing time. The source does not emit watermarks and does not take part in
  * Flink's checkpointing mechanism.
  *

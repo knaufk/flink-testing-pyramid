@@ -2,17 +2,15 @@ package com.github.knaufk;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
+
+import com.github.knaufk.utils.CollectingSink;
+import com.github.knaufk.utils.ParallelCollectionSource;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
-import org.apache.flink.configuration.Configuration;
 import org.apache.flink.runtime.testutils.MiniClusterResourceConfiguration;
-import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.api.functions.source.ParallelSourceFunction;
-import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 import org.apache.flink.test.util.MiniClusterWithClientResource;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -32,7 +30,7 @@ public class StreamingJobIntegrationTest {
 
     // Arrange
     CollectingSink sink = new CollectingSink();
-    ParallelSourceFunction source =
+    ParallelSourceFunction<List<Integer>> source =
         new ParallelCollectionSource(
             Arrays.asList(
                 new Tuple2<>(500L, Arrays.asList(1)),
@@ -59,51 +57,4 @@ public class StreamingJobIntegrationTest {
             new Tuple3<>(3000L, 3, 2));
   }
 
-  private static class ParallelCollectionSource extends RichParallelSourceFunction<List<Integer>> {
-
-    private List<Tuple2<Long, List<Integer>>> input;
-    private List<Tuple2<Long, List<Integer>>> inputOfSubtask;
-
-    public ParallelCollectionSource(List<Tuple2<Long, List<Integer>>> input) {
-      this.input = input;
-    }
-
-    @Override
-    public void open(Configuration parameters) throws Exception {
-      super.open(parameters);
-
-      int numberOfParallelSubtasks = getRuntimeContext().getNumberOfParallelSubtasks();
-      int indexOfThisSubtask = getRuntimeContext().getIndexOfThisSubtask();
-
-      inputOfSubtask = new ArrayList<>();
-
-      for (int i = 0; i < input.size(); i++) {
-        if (i % numberOfParallelSubtasks == indexOfThisSubtask) {
-          inputOfSubtask.add(input.get(i));
-        }
-      }
-    }
-
-    @Override
-    public void run(SourceContext<List<Integer>> ctx) throws Exception {
-      for (Tuple2<Long, List<Integer>> integerListWithTimestamp : inputOfSubtask) {
-        ctx.collectWithTimestamp(integerListWithTimestamp.f1, integerListWithTimestamp.f0);
-      }
-    }
-
-    @Override
-    public void cancel() {
-      // ignore cancel, finite anyway
-    }
-  }
-
-  private static class CollectingSink implements SinkFunction<Tuple3<Long, Integer, Integer>> {
-
-    private static final List<Tuple3<Long, Integer, Integer>> result =
-        Collections.synchronizedList(new ArrayList<>());
-
-    public void invoke(Tuple3<Long, Integer, Integer> value, Context context) throws Exception {
-      result.add(value);
-    }
-  }
 }
