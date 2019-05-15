@@ -1,17 +1,14 @@
-package com.github.knaufk.utils;
+package com.github.knaufk.testing.java.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- *
- * A parallel, finite/bounded source function, which emits the records given to it during construction. The records are
- * emitted with a timestamp, which is also given during construction.
- *
+ * A parallel, finite/bounded source function, which emits the records given to it during
+ * construction. The records are emitted with a timestamp, which is also given during construction.
  */
 public class ParallelCollectionSource<T> extends RichParallelSourceFunction<T> {
 

@@ -1,6 +1,7 @@
 plugins {
     id "com.github.sherter.google-java-format" version "0.8"
     id "java"
+    id 'scala'
 }
 
 
@@ -35,11 +36,17 @@ dependencies {
 
     compile "org.apache.flink:flink-java:$flinkVersion"
     compile "org.apache.flink:flink-streaming-java_$scalaBinaryVersion:$flinkVersion"
+    compile "org.apache.flink:flink-streaming-scala_$scalaBinaryVersion:$flinkVersion"
     compile "org.apache.flink:flink-runtime-web_$scalaBinaryVersion:$flinkVersion"
+
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.11.5'
 
     testCompile "junit:junit:$junitVersion"
     testCompile "org.mockito:mockito-all:$mockitoVersion"
     testCompile "org.assertj:assertj-core:3.12.2"
+
+    testCompile "org.scalatest:scalatest_$scalaBinaryVersion:3.0.7"
+    testCompile "org.scalamock:scalamock_$scalaBinaryVersion:4.1.0"
 
     testCompile "org.apache.flink:flink-test-utils_$scalaBinaryVersion:$flinkVersion"
     testCompile "org.apache.flink:flink-runtime_$scalaBinaryVersion:$flinkVersion:tests"

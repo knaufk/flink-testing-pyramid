@@ -1,4 +1,4 @@
-package com.github.knaufk;
+package com.github.knaufk.testing.java;
 
 import java.util.List;
 import java.util.Random;
@@ -7,9 +7,9 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 
 /**
- * An in-memory source of {@link List<Integer>}s to feed the job. The source assigns timestamps to the
- * records based on processing time. The source does not emit watermarks and does not take part in
- * Flink's checkpointing mechanism.
+ * An in-memory source of {@link List<Integer>}s to feed the job. The source assigns timestamps to
+ * the records based on processing time. The source does not emit watermarks and does not take part
+ * in Flink's checkpointing mechanism.
  *
  * <p>This is merely a mock for a real source connecting to an external system (like Kinesis, Pulsar
  * or Kafka).

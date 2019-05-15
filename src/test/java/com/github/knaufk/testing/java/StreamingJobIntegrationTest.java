@@ -1,12 +1,11 @@
-package com.github.knaufk;
+package com.github.knaufk.testing.java;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
+import com.github.knaufk.testing.java.utils.CollectingSink;
+import com.github.knaufk.testing.java.utils.ParallelCollectionSource;
 import java.util.Arrays;
-
-import com.github.knaufk.utils.CollectingSink;
-import com.github.knaufk.utils.ParallelCollectionSource;
+import java.util.List;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.runtime.testutils.MiniClusterResourceConfiguration;
@@ -56,5 +55,4 @@ public class StreamingJobIntegrationTest {
             new Tuple3<>(3000L, 2, 2),
             new Tuple3<>(3000L, 3, 2));
   }
-
 }

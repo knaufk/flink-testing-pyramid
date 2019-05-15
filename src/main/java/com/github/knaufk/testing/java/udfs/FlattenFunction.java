@@ -1,4 +1,4 @@
-package com.github.knaufk.udfs;
+package com.github.knaufk.testing.java.udfs;
 
 import java.util.List;
 import org.apache.flink.annotation.VisibleForTesting;

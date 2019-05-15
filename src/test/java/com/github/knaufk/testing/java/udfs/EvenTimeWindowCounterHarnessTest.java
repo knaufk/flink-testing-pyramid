@@ -1,4 +1,4 @@
-package com.github.knaufk.udfs;
+package com.github.knaufk.testing.java.udfs;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;

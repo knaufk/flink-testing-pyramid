@@ -1,4 +1,4 @@
-package com.github.knaufk.udfs;
+package com.github.knaufk.testing.java.udfs;
 
 import java.util.Iterator;
 import org.apache.flink.api.common.state.MapState;

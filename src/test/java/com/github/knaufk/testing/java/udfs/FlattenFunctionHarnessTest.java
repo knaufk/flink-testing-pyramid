@@ -1,4 +1,4 @@
-package com.github.knaufk.udfs;
+package com.github.knaufk.testing.java.udfs;
 
 import static org.assertj.core.api.Assertions.*;
 

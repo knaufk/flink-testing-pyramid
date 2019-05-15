@@ -1,14 +1,16 @@
-package com.github.knaufk;
+package com.github.knaufk.testing.java;
 
-import com.github.knaufk.udfs.BoundedOutOfOrdernessWatermarkAssigner;
-import com.github.knaufk.udfs.EvenTimeWindowCounter;
-import com.github.knaufk.udfs.FlattenFunction;
+import com.github.knaufk.testing.java.udfs.BoundedOutOfOrdernessWatermarkAssigner;
+import com.github.knaufk.testing.java.udfs.EvenTimeWindowCounter;
+import com.github.knaufk.testing.java.udfs.FlattenFunction;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.flink.api.common.time.Time;
+import org.apache.flink.api.common.typeinfo.TypeHint;
+import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.TimeCharacteristic;
-import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.PrintSinkFunction;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
@@ -33,13 +35,17 @@ public class StreamingJob {
 
     StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
+    TypeInformation.of(String.class).createSerializer(env.getConfig());
+
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
-    SingleOutputStreamOperator<List<Integer>> listSingleOutputStreamOperator =
+    DataStream<List<Integer>> integerListsStream =
         env.addSource(source)
+            .returns(TypeInformation.of(new TypeHint<List<Integer>>() {}))
             .assignTimestampsAndWatermarks(
                 new BoundedOutOfOrdernessWatermarkAssigner<>(Time.of(100, TimeUnit.MILLISECONDS)));
-    listSingleOutputStreamOperator
+
+    integerListsStream
         .flatMap(new FlattenFunction())
         .keyBy(integer -> integer)
         .process(new EvenTimeWindowCounter(Time.of(1, TimeUnit.SECONDS)))

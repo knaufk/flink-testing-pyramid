@@ -1,4 +1,4 @@
-package com.github.knaufk.udfs;
+package com.github.knaufk.testing.java.udfs;
 
 import org.apache.flink.api.common.time.Time;
 import org.apache.flink.streaming.api.functions.AssignerWithPeriodicWatermarks;
