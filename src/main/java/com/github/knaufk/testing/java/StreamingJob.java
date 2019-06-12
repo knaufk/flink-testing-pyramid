@@ -1,7 +1,7 @@
 package com.github.knaufk.testing.java;
 
 import com.github.knaufk.testing.java.udfs.BoundedOutOfOrdernessWatermarkAssigner;
-import com.github.knaufk.testing.java.udfs.EvenTimeWindowCounter;
+import com.github.knaufk.testing.java.udfs.EventTimeWindowCounter;
 import com.github.knaufk.testing.java.udfs.FlattenFunction;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +48,7 @@ public class StreamingJob {
     integerListsStream
         .flatMap(new FlattenFunction())
         .keyBy(integer -> integer)
-        .process(new EvenTimeWindowCounter(Time.of(1, TimeUnit.SECONDS)))
+        .process(new EventTimeWindowCounter(Time.of(1, TimeUnit.SECONDS)))
         .addSink(sink);
 
     env.execute();

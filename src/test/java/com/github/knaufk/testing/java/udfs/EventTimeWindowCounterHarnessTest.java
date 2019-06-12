@@ -15,19 +15,19 @@ import org.apache.flink.streaming.util.KeyedOneInputStreamOperatorTestHarness;
 import org.junit.Before;
 import org.junit.Test;
 
-public class EvenTimeWindowCounterHarnessTest {
+public class EventTimeWindowCounterHarnessTest {
 
   private KeyedOneInputStreamOperatorTestHarness<Integer, Integer, Tuple3<Long, Integer, Integer>>
       testHarness;
-  private KeyedProcessFunction flattenFunction;
+  private KeyedProcessFunction eventTimeWindowCounter;
 
   @Before
   public void setupTestHarness() throws Exception {
-    flattenFunction = new EvenTimeWindowCounter(Time.of(1, SECONDS));
+    eventTimeWindowCounter = new EventTimeWindowCounter(Time.of(1, SECONDS));
     testHarness =
         new KeyedOneInputStreamOperatorTestHarness<
             Integer, Integer, Tuple3<Long, Integer, Integer>>(
-            new KeyedProcessOperator<>(flattenFunction),
+            new KeyedProcessOperator<>(eventTimeWindowCounter),
             integer -> integer,
             TypeInformation.of(Integer.class));
     testHarness.open();

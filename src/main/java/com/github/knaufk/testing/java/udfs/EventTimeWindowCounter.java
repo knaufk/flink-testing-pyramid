@@ -14,13 +14,13 @@ import org.apache.flink.util.Collector;
  * event time window of the size given in the constructor. The counts is emitted once, when the
  * watermark passes the end time of the window.
  */
-public class EvenTimeWindowCounter
+public class EventTimeWindowCounter
     extends KeyedProcessFunction<Integer, Integer, Tuple3<Long, Integer, Integer>> {
 
   private long windowSizeMs;
   private MapState<Long, Integer> windowCounts;
 
-  public EvenTimeWindowCounter(Time windowSize) {
+  public EventTimeWindowCounter(Time windowSize) {
     this.windowSizeMs = windowSize.toMilliseconds();
   }
 
