@@ -7,7 +7,7 @@ This project illustrates how to test Apache Flink applications on different leve
 The projects currently contains examples for
 
 * unit tests of [Stateless UDFs](../master/src/test/java/com/github/knaufk/testing/java/udfs/FlattenFunctionTest.java)
-* unit tests of [Stateful UDFs](../master/src/test/java/com/github/knaufk/testing/java/udfs/EvenTimeWindowCounterHarnessTest.java) incl. [WatermarkAssigners](../master/src/test/java/com/github/knaufk/testing/java/udfs/WatermarkAssignerHarnessTest.java)
+* unit tests of [Stateful UDFs](../master/src/test/java/com/github/knaufk/testing/java/udfs/EventTimeWindowCounterHarnessTest.java) incl. [WatermarkAssigners](../master/src/test/java/com/github/knaufk/testing/java/udfs/WatermarkAssignerHarnessTest.java)
 * integration tests for complete [Flink Jobs](../master/src/test/java/com/github/knaufk/testing/java/StreamingJobIntegrationTest.java)
 
 ## Build
